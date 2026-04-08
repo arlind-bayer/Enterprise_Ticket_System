@@ -31,7 +31,12 @@ public class DataStore {
         try (ObjectInputStream input = new ObjectInputStream(new FileInputStream(filePath.toFile()))) {
             return (List<ServiceRequest>) input.readObject();
         } catch (IOException | ClassNotFoundException e) {
-            System.out.println("Warning: Could not read existing data. Starting with empty list.");
+            System.out.println(
+                "Warning: Could not read existing data ("
+                    + e.getClass().getSimpleName()
+                    + ": "
+                    + e.getMessage()
+                    + "). Starting with empty list.");
             return new ArrayList<>();
         }
     }
